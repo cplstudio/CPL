@@ -12,16 +12,27 @@
   src: url('https://raw.githubusercontent.com/mcansh/yeezy-logo-font/gh-pages/fonts/YeezyDisplay-Regular.woff') format('woff');
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  text-transform:uppercase;
+}
 
 body {
   background:black;
   color:white;
-  font-family:'Yeezy', Arial, sans-serif;
+  font-family:'Courier New', monospace;
+  letter-spacing:1px;
   overflow-x:hidden;
 }
 
-a { text-decoration:none; color:white; }
+a {
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
+}
+a:hover { opacity:0.6; }
 
 .navbar {
   display:flex;
@@ -32,14 +43,13 @@ a { text-decoration:none; color:white; }
   width:100%;
   top:0;
   background:black;
-  z-index:100;
   border-bottom:1px solid #222;
+  z-index:100;
 }
 
-.logo { font-size:20px; letter-spacing:4px; transform: scaleX(1.1); }
+.logo { letter-spacing:4px; font-size:20px; }
 
-.nav-links a { margin-left:30px; font-size:14px; letter-spacing:2px; cursor:pointer; transition:0.2s; }
-.nav-links a:hover { opacity:0.7; }
+.nav-links a { margin-left:30px; font-size:14px; cursor:pointer; }
 
 .section {
   min-height:100vh;
@@ -49,24 +59,29 @@ a { text-decoration:none; color:white; }
   justify-content:flex-start;
   padding:150px 20px 50px 20px;
   text-align:center;
+  opacity:0;
+  transform:translateY(50px);
+  transition:opacity 0.6s ease, transform 0.6s ease;
 }
 
-h1 { font-size:48px; letter-spacing:5px; transform: scaleX(1.1); margin-bottom:20px; }
-h2 { font-size:32px; margin-bottom:10px; }
-p { font-size:16px; letter-spacing:1px; margin-bottom:10px; }
+.section.active {
+  opacity:1;
+  transform:translateY(0);
+}
+
+h1 { font-size:48px; margin-bottom:20px; }
+h2 { font-size:28px; margin-bottom:10px; }
+p { font-size:16px; margin-bottom:10px; line-height:1.6; }
 
 .film-card {
   border:1px solid white;
   padding:30px;
-  max-width:600px;
-  transition:0.3s;
+  max-width:700px;
   margin-top:40px;
 }
-.film-card:hover { transform:scale(1.02); }
 
-.film-title { font-size:28px; margin-bottom:10px; letter-spacing:2px; }
-.film-countdown { font-size:20px; margin-bottom:15px; }
-.film-description { font-size:16px; margin-bottom:15px; }
+.film-countdown { margin:15px 0; font-size:18px; }
+.film-description { margin-bottom:15px; }
 .film-cast { font-size:14px; margin-bottom:15px; }
 
 input {
@@ -84,22 +99,27 @@ button {
   border:none;
   padding:12px 25px;
   cursor:pointer;
-  transition:0.2s;
 }
 button:hover { opacity:0.8; }
 
 .hidden { display:none; }
 #status { margin-top:15px; font-weight:bold; }
 
-footer { text-align:center; padding:50px 0 30px 0; font-size:14px; color:#aaa; border-top:1px solid #222; }
+footer {
+  text-align:center;
+  padding:50px 0;
+  font-size:12px;
+  color:#777;
+  border-top:1px solid #222;
+}
+
+.footer-links a { margin:0 15px; font-size:12px; }
 </style>
 
-<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
 emailjs.init("WZohIOO3gAK80T6ii");
 </script>
-
 </head>
 <body>
 
@@ -108,54 +128,98 @@ emailjs.init("WZohIOO3gAK80T6ii");
   <div class="logo">CPLS</div>
   <div class="nav-links">
     <a onclick="showPage('home')">HOME</a>
-    <a onclick="showPage('films')">FILM</a>
+    <a onclick="showPage('film')">FILM</a>
+    <a onclick="showPage('store')">STORE</a>
     <a onclick="showPage('signup')">SIGN UP</a>
+    <a onclick="showPage('privacy')">PRIVACY</a>
+    <a onclick="showPage('terms')">TERMS</a>
+    <a onclick="showPage('cookies')">COOKIES</a>
   </div>
 </div>
 
 <!-- HOME -->
-<div id="home" class="section">
+<div id="home" class="section active">
   <h1>CREATIVE PRODUCTIVITY</h1>
   <p>FILM • MUSIC • DESIGN</p>
+  <p>WELCOME TO CPL STUDIOS, WHERE INNOVATION MEETS ARTISTRY.</p>
+  <p>EXPLORE OUR FILMS, STAY UPDATED, AND SIGN UP FOR EXCLUSIVE ACCESS.</p>
 </div>
 
 <!-- FILM -->
-<div id="films" class="section hidden">
+<div id="film" class="section">
   <h1>VEIL</h1>
   <div class="film-card">
-    <div class="film-title">VEIL</div>
-    <div class="film-countdown" id="countdown">Loading countdown...</div>
+    <h2>VEIL</h2>
+    <div class="film-countdown" id="countdown"></div>
     <div class="film-description">
-      A dark, atmospheric thriller exploring hidden truths and unseen realities.  
-      Secrets collide as the past haunts the present.
+      A DARK ATMOSPHERIC THRILLER EXPLORING HIDDEN TRUTHS AND UNSEEN REALITIES.<br>
+      SECRETS COLLIDE AS THE PAST HAUNTS THE PRESENT.<br>
+      SUSPENSE BUILDS WITH EVERY SCENE, LEAVING VIEWERS ON EDGE.<br>
+      CINEMATIC SHOTS DELIVER AN IMMERSIVE EXPERIENCE.<br>
+      A STORY OF TRUST, BETRAYAL, AND REDEMPTION.
     </div>
     <div class="film-cast">
-      <strong>Cast:</strong> Alice Monroe, Theo Carter, Lila Zhang
+      CAST: CODY PALMER • YAMAAN BIN AZMAT • SARA BATISTA • BRENDA RODRIGUES
     </div>
   </div>
 </div>
 
+<!-- STORE -->
+<div id="store" class="section">
+  <h1>STORE</h1>
+  <p>COMING SOON</p>
+  <p>EXCLUSIVE MERCHANDISE, LIMITED EDITIONS, AND MORE.</p>
+</div>
+
 <!-- SIGNUP -->
-<div id="signup" class="section hidden">
+<div id="signup" class="section">
   <h1>SIGN UP</h1>
-  <input type="email" id="email" placeholder="EMAIL"><br>
+  <input type="email" id="email" placeholder="EMAIL">
   <button onclick="sendCode()">SEND CODE</button>
-  <br><br>
-  <input type="text" id="code" placeholder="ENTER CODE"><br>
+  <input type="text" id="code" placeholder="ENTER CODE">
   <button onclick="verifyCode()">VERIFY</button>
   <p id="status"></p>
+  <p>SIGN UP TO RECEIVE EXCLUSIVE UPDATES ON CPL STUDIOS PROJECTS.</p>
+</div>
+
+<!-- PRIVACY POLICY -->
+<div id="privacy" class="section">
+  <h1>PRIVACY POLICY</h1>
+  <p>WE RESPECT YOUR PRIVACY. ALL DATA COLLECTED IS SECURE AND USED ONLY FOR UPDATES.</p>
+  <p>EMAILS PROVIDED WILL NOT BE SHARED WITH THIRD PARTIES.</p>
+  <p>COOKIES MAY BE USED TO ENHANCE YOUR EXPERIENCE.</p>
+</div>
+
+<!-- TERMS -->
+<div id="terms" class="section">
+  <h1>TERMS AND CONDITIONS</h1>
+  <p>BY ACCESSING THIS SITE, YOU AGREE TO OUR TERMS OF USE.</p>
+  <p>ALL CONTENT IS COPYRIGHT CPL STUDIOS 2026.</p>
+  <p>YOU MAY NOT REPRODUCE, DISTRIBUTE, OR MODIFY CONTENT WITHOUT PERMISSION.</p>
+</div>
+
+<!-- COOKIES -->
+<div id="cookies" class="section">
+  <h1>COOKIES POLICY</h1>
+  <p>THIS SITE USES COOKIES TO IMPROVE PERFORMANCE AND EXPERIENCE.</p>
+  <p>YOU CAN MANAGE YOUR COOKIE PREFERENCES IN YOUR BROWSER SETTINGS.</p>
 </div>
 
 <!-- FOOTER -->
 <footer>
-  © 2026 CPL STUDIOS • All rights reserved
+  © 2026 CPL STUDIOS
+  <div class="footer-links">
+    <a onclick="showPage('privacy')">PRIVACY</a>•
+    <a onclick="showPage('terms')">TERMS</a>•
+    <a onclick="showPage('cookies')">COOKIES</a>
+  </div>
 </footer>
 
 <script>
-// PAGE NAVIGATION
+// PAGE NAVIGATION WITH TRANSITIONS
 function showPage(page){
-  document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-  document.getElementById(page).classList.remove('hidden');
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
 }
 
 // FILM COUNTDOWN
@@ -172,26 +236,21 @@ setInterval(() => {
 
 // EMAIL OTP SYSTEM
 let generatedCode = "";
-
 function sendCode(){
   const email = document.getElementById("email").value;
-  if(!email) return alert("Enter email");
-
+  if(!email) return alert("ENTER EMAIL");
   generatedCode = Math.floor(10000 + Math.random()*90000).toString();
   const expiry = new Date(Date.now() + 15*60*1000);
-  const timeString = expiry.toLocaleTimeString();
-
   emailjs.send("service_mekrg6y","template_amf4wt3",{
     passcode: generatedCode,
-    time: timeString,
+    time: expiry.toLocaleTimeString(),
     to_email: email,
     email: email,
     user_email: email
   })
   .then(()=> document.getElementById("status").innerText="CODE SENT")
-  .catch(err => document.getElementById("status").innerText="EMAIL FAILED: "+err.text);
+  .catch(err => document.getElementById("status").innerText="EMAIL FAILED");
 }
-
 function verifyCode(){
   const input = document.getElementById("code").value;
   document.getElementById("status").innerText = (input===generatedCode)?"VERIFIED":"INVALID CODE";
