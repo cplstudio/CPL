@@ -3,54 +3,56 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CPL STUDIOS</title>
+<title>CPL</title>
 
-<!-- Fonts & Styles -->
+<!-- Yeezy Display / Code font -->
 <style>
 @font-face {
   font-family: 'Yeezy';
   src: url('https://raw.githubusercontent.com/mcansh/yeezy-logo-font/gh-pages/fonts/YeezyDisplay-Regular.woff') format('woff');
+  font-weight: 100;
+  font-stretch: expanded;
 }
 
 * {
   margin:0;
   padding:0;
   box-sizing:border-box;
-  text-transform:uppercase;
+  font-family:'Yeezy', monospace, monospace;
+  font-weight:100;
+  font-stretch: expanded;
+  text-transform: uppercase;
 }
 
 body {
   background:black;
   color:white;
-  font-family:'Courier New', monospace;
-  letter-spacing:1px;
-  overflow-x:hidden;
 }
 
-a {
-  text-decoration:none;
-  color:white;
-  transition:0.3s;
-}
-a:hover { opacity:0.6; }
-
+/* NAVBAR */
 .navbar {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 50px;
+  padding:20px 40px;
   position:fixed;
   width:100%;
   top:0;
   background:black;
-  border-bottom:1px solid #222;
-  z-index:100;
 }
 
-.logo { letter-spacing:4px; font-size:20px; }
+.logo { letter-spacing:4px; }
 
-.nav-links a { margin-left:30px; font-size:14px; cursor:pointer; }
+.nav-links a {
+  margin-left:30px;
+  text-decoration:none;
+  color:white;
+  font-size:13px;
+  letter-spacing:2px;
+  cursor:pointer;
+}
 
+/* SECTIONS */
 .section {
   min-height:100vh;
   display:flex;
@@ -59,37 +61,35 @@ a:hover { opacity:0.6; }
   justify-content:flex-start;
   padding:150px 20px 50px 20px;
   text-align:center;
-  opacity:0;
-  transform:translateY(50px);
-  transition:opacity 0.6s ease, transform 0.6s ease;
 }
 
-.section.active {
-  opacity:1;
-  transform:translateY(0);
-}
+.section.hidden { display:none; }
 
-h1 { font-size:48px; margin-bottom:20px; }
+h1 { font-size:42px; letter-spacing:5px; margin-bottom:20px; }
 h2 { font-size:28px; margin-bottom:10px; }
-p { font-size:16px; margin-bottom:10px; line-height:1.6; }
+p { font-size:16px; line-height:1.5; max-width:800px; }
+
+/* FILMS GRID */
+.films-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+  gap:30px;
+  width:80%;
+}
 
 .film-card {
   border:1px solid white;
   padding:30px;
-  max-width:700px;
-  margin-top:40px;
+  text-align:left;
 }
 
-.film-countdown { margin:15px 0; font-size:18px; }
-.film-description { margin-bottom:15px; }
-.film-cast { font-size:14px; margin-bottom:15px; }
-
+/* INPUTS / BUTTONS */
 input {
   background:black;
   border:1px solid white;
   color:white;
-  padding:12px;
-  margin:10px 0;
+  padding:10px;
+  margin:10px;
   width:250px;
 }
 
@@ -97,163 +97,168 @@ button {
   background:white;
   color:black;
   border:none;
-  padding:12px 25px;
+  padding:10px 20px;
   cursor:pointer;
+  margin-top:10px;
 }
-button:hover { opacity:0.8; }
 
-.hidden { display:none; }
-#status { margin-top:15px; font-weight:bold; }
-
-footer {
+/* FOOTER LINKS */
+.footer {
+  margin-top:50px;
+  padding:30px;
   text-align:center;
-  padding:50px 0;
-  font-size:12px;
-  color:#777;
-  border-top:1px solid #222;
+  border-top:1px solid white;
 }
 
-.footer-links a { margin:0 15px; font-size:12px; }
+.footer a {
+  margin:0 10px;
+  text-decoration:none;
+  color:white;
+  font-size:12px;
+}
+
 </style>
 
+<!-- EmailJS -->
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
-emailjs.init("WZohIOO3gAK80T6ii");
+(function(){ emailjs.init("WZohIOO3gAK80T6ii"); })();
 </script>
+
 </head>
 <body>
 
 <!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">CPLS</div>
+  <div class="logo">CPL STUDIOS</div>
   <div class="nav-links">
     <a onclick="showPage('home')">HOME</a>
-    <a onclick="showPage('film')">FILM</a>
+    <a onclick="showPage('films')">FILMS</a>
     <a onclick="showPage('store')">STORE</a>
+    <a onclick="showPage('music')">MUSIC</a>
     <a onclick="showPage('signup')">SIGN UP</a>
-    <a onclick="showPage('privacy')">PRIVACY</a>
-    <a onclick="showPage('terms')">TERMS</a>
-    <a onclick="showPage('cookies')">COOKIES</a>
   </div>
 </div>
 
 <!-- HOME -->
-<div id="home" class="section active">
+<div id="home" class="section">
   <h1>CREATIVE PRODUCTIVITY</h1>
   <p>FILM • MUSIC • DESIGN</p>
-  <p>WELCOME TO CPL STUDIOS, WHERE INNOVATION MEETS ARTISTRY.</p>
-  <p>EXPLORE OUR FILMS, STAY UPDATED, AND SIGN UP FOR EXCLUSIVE ACCESS.</p>
 </div>
 
-<!-- FILM -->
-<div id="film" class="section">
-  <h1>VEIL</h1>
-  <div class="film-card">
-    <h2>VEIL</h2>
-    <div class="film-countdown" id="countdown"></div>
-    <div class="film-description">
-      A DARK ATMOSPHERIC THRILLER EXPLORING HIDDEN TRUTHS AND UNSEEN REALITIES.<br>
-      SECRETS COLLIDE AS THE PAST HAUNTS THE PRESENT.<br>
-      SUSPENSE BUILDS WITH EVERY SCENE, LEAVING VIEWERS ON EDGE.<br>
-      CINEMATIC SHOTS DELIVER AN IMMERSIVE EXPERIENCE.<br>
-      A STORY OF TRUST, BETRAYAL, AND REDEMPTION.
-    </div>
-    <div class="film-cast">
-      CAST: CODY PALMER • YAMAAN BIN AZMAT • SARA BATISTA • BRENDA RODRIGUES
+<!-- FILMS -->
+<div id="films" class="section hidden">
+  <h1>FILMS</h1>
+  <div class="films-grid">
+    <div class="film-card">
+      <h2>VEIL</h2>
+      <p><strong>Cast:</strong> CODY PALMER, YAMAAN BIN AZMAT, SARA BATISTA, BRENDA RODRIGUES</p>
+      <p><strong>Description:</strong> VEIL is an epic cinematic journey exploring the boundaries of creativity and identity. Prepare for a visually stunning narrative that challenges conventions and ignites the imagination.</p>
+      <p id="countdown"></p>
     </div>
   </div>
 </div>
 
 <!-- STORE -->
-<div id="store" class="section">
+<div id="store" class="section hidden">
   <h1>STORE</h1>
   <p>COMING SOON</p>
-  <p>EXCLUSIVE MERCHANDISE, LIMITED EDITIONS, AND MORE.</p>
+</div>
+
+<!-- MUSIC -->
+<div id="music" class="section hidden">
+  <h1>MUSIC</h1>
+  <p>PROJECTS COMING SOON</p>
 </div>
 
 <!-- SIGNUP -->
-<div id="signup" class="section">
+<div id="signup" class="section hidden">
   <h1>SIGN UP</h1>
-  <input type="email" id="email" placeholder="EMAIL">
+  <input type="email" id="email" placeholder="EMAIL"><br>
+  <input type="password" id="password" placeholder="PASSWORD"><br>
   <button onclick="sendCode()">SEND CODE</button>
-  <input type="text" id="code" placeholder="ENTER CODE">
+  <br><br>
+  <input type="text" id="code" placeholder="CODE"><br>
   <button onclick="verifyCode()">VERIFY</button>
   <p id="status"></p>
-  <p>SIGN UP TO RECEIVE EXCLUSIVE UPDATES ON CPL STUDIOS PROJECTS.</p>
 </div>
 
-<!-- PRIVACY POLICY -->
-<div id="privacy" class="section">
+<!-- PRIVACY / TERMS / COOKIES -->
+<div id="privacy" class="section hidden">
   <h1>PRIVACY POLICY</h1>
-  <p>WE RESPECT YOUR PRIVACY. ALL DATA COLLECTED IS SECURE AND USED ONLY FOR UPDATES.</p>
-  <p>EMAILS PROVIDED WILL NOT BE SHARED WITH THIRD PARTIES.</p>
-  <p>COOKIES MAY BE USED TO ENHANCE YOUR EXPERIENCE.</p>
+  <p>Your privacy is our priority. CPL Studios never shares your personal information. All signup data is securely handled via EmailJS and stored temporarily for verification purposes only.</p>
 </div>
 
-<!-- TERMS -->
-<div id="terms" class="section">
-  <h1>TERMS AND CONDITIONS</h1>
-  <p>BY ACCESSING THIS SITE, YOU AGREE TO OUR TERMS OF USE.</p>
-  <p>ALL CONTENT IS COPYRIGHT CPL STUDIOS 2026.</p>
-  <p>YOU MAY NOT REPRODUCE, DISTRIBUTE, OR MODIFY CONTENT WITHOUT PERMISSION.</p>
+<div id="terms" class="section hidden">
+  <h1>TERMS OF SERVICE</h1>
+  <p>By using CPL Studios, you agree to our content guidelines, verification rules, and responsible use. Sharing codes or bypassing verification is prohibited.</p>
 </div>
 
-<!-- COOKIES -->
-<div id="cookies" class="section">
+<div id="cookies" class="section hidden">
   <h1>COOKIES POLICY</h1>
-  <p>THIS SITE USES COOKIES TO IMPROVE PERFORMANCE AND EXPERIENCE.</p>
-  <p>YOU CAN MANAGE YOUR COOKIE PREFERENCES IN YOUR BROWSER SETTINGS.</p>
+  <p>CPL Studios uses cookies for site functionality and user experience. No personal data is tracked beyond temporary session verification.</p>
 </div>
 
 <!-- FOOTER -->
-<footer>
-  © 2026 CPL STUDIOS
-  <div class="footer-links">
-    <a onclick="showPage('privacy')">PRIVACY</a>•
-    <a onclick="showPage('terms')">TERMS</a>•
-    <a onclick="showPage('cookies')">COOKIES</a>
-  </div>
-</footer>
+<div class="footer">
+  <a onclick="showPage('privacy')">PRIVACY POLICY</a> |
+  <a onclick="showPage('terms')">TERMS</a> |
+  <a onclick="showPage('cookies')">COOKIES</a>
+</div>
 
+<!-- SCRIPTS -->
 <script>
-// PAGE NAVIGATION WITH TRANSITIONS
 function showPage(page){
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(page).classList.add('active');
+  document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+  document.getElementById(page).classList.remove('hidden');
 }
 
-// FILM COUNTDOWN
+// COUNTDOWN TIMER
 const targetDate = new Date("September 21, 2026 00:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
   const diff = targetDate - now;
   const d = Math.floor(diff / (1000*60*60*24));
-  const h = Math.floor((diff % (1000*60*60*24))/(1000*60*60));
-  const m = Math.floor((diff % (1000*60*60))/(1000*60));
+  const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const m = Math.floor((diff % (1000*60*60)) / (1000*60));
   const s = Math.floor((diff % (1000*60))/1000);
   document.getElementById("countdown").innerText = `${d}D ${h}H ${m}M ${s}S`;
 }, 1000);
 
-// EMAIL OTP SYSTEM
+// EMAILJS OTP
 let generatedCode = "";
-function sendCode(){
+
+function sendCode() {
   const email = document.getElementById("email").value;
-  if(!email) return alert("ENTER EMAIL");
-  generatedCode = Math.floor(10000 + Math.random()*90000).toString();
+  if(!email) return alert("Enter email");
+
+  generatedCode = Math.floor(10000 + Math.random() * 90000).toString();
+
   const expiry = new Date(Date.now() + 15*60*1000);
-  emailjs.send("service_mekrg6y","template_amf4wt3",{
+  const timeString = expiry.toLocaleTimeString();
+
+  emailjs.send("service_mekrg6y", "template_amf4wt3", {
     passcode: generatedCode,
-    time: expiry.toLocaleTimeString(),
+    time: timeString,
     to_email: email,
     email: email,
     user_email: email
   })
-  .then(()=> document.getElementById("status").innerText="CODE SENT")
-  .catch(err => document.getElementById("status").innerText="EMAIL FAILED");
+  .then(() => {
+    document.getElementById("status").innerText = "CODE SENT";
+  })
+  .catch((error) => {
+    document.getElementById("status").innerText = "EMAIL FAILED: " + error.text;
+  });
 }
-function verifyCode(){
+
+function verifyCode() {
   const input = document.getElementById("code").value;
-  document.getElementById("status").innerText = (input===generatedCode)?"VERIFIED":"INVALID CODE";
+  if(input === generatedCode) {
+    document.getElementById("status").innerText = "VERIFIED";
+  } else {
+    document.getElementById("status").innerText = "INVALID CODE";
+  }
 }
 </script>
 
